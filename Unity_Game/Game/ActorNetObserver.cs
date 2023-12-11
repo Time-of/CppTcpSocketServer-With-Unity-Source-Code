@@ -7,18 +7,18 @@ using UnityEngine;
 
 
 /// <summary>
-/// ¾×ÅÍÀÇ ¿òÁ÷ÀÓÀ» ÆÄ¾ÇÇÏ¿© ¼­¹ö¿¡ Àü¼ÛÇÏ°Å³ª, 
-/// ¼­¹ö¿¡¼­ ¹Ş¾Æ¿Â Å¸ ÇÃ·¹ÀÌ¾îÀÇ ¿òÁ÷ÀÓ µ¥ÀÌÅÍ¸¦ ¾×ÅÍ¿¡ 
-/// Àû¿ëÇÏ¿©, ¼­¹ö¿Í µ¥ÀÌÅÍ¸¦ µ¿±âÈ­ÇÏ´Â ¿ªÇÒÀÇ Å¬·¡½ºÀÔ´Ï´Ù. <br/>
+/// ì•¡í„°ì˜ ì›€ì§ì„ì„ íŒŒì•…í•˜ì—¬ ì„œë²„ì— ì „ì†¡í•˜ê±°ë‚˜, 
+/// ì„œë²„ì—ì„œ ë°›ì•„ì˜¨ íƒ€ í”Œë ˆì´ì–´ì˜ ì›€ì§ì„ ë°ì´í„°ë¥¼ ì•¡í„°ì— 
+/// ì ìš©í•˜ì—¬, ì„œë²„ì™€ ë°ì´í„°ë¥¼ ë™ê¸°í™”í•˜ëŠ” ì—­í• ì˜ í´ë˜ìŠ¤ì…ë‹ˆë‹¤. <br/>
 /// <br/>
 /// 
-/// ÁÖ ¿ªÇÒÀº ¼ÒÀ¯±Ç¿¡ µû¶ó ´Ù¸¨´Ï´Ù. <br/>
-/// - º»ÀÎ ¼ÒÀ¯¶ó¸é, °¨½Ã ¿ªÇÒÀÌ¸ç <br/>
-/// - Å¸ÀÎ ¼ÒÀ¯¶ó¸é, Á¶Á¾ ¿ªÇÒÀÔ´Ï´Ù. <br/>
+/// ì£¼ ì—­í• ì€ ì†Œìœ ê¶Œì— ë”°ë¼ ë‹¤ë¦…ë‹ˆë‹¤. <br/>
+/// - ë³¸ì¸ ì†Œìœ ë¼ë©´, ê°ì‹œ ì—­í• ì´ë©° <br/>
+/// - íƒ€ì¸ ì†Œìœ ë¼ë©´, ì¡°ì¢… ì—­í• ì…ë‹ˆë‹¤. <br/>
 /// <br/>
 /// 
-/// ¾×ÅÍ¿¡ ÀÇÇØ¼­ ¼­¹ö·ÎºÎÅÍ »ı¼ºµÊ! (¼­¹ö°¡ ÆÇ´ÜÇÏ¿© »ı¼º/¼Ò¸ê °áÁ¤)
-/// PlayerClient°¡ °ü¸®.
+/// ì•¡í„°ì— ì˜í•´ì„œ ì„œë²„ë¡œë¶€í„° ìƒì„±ë¨! (ì„œë²„ê°€ íŒë‹¨í•˜ì—¬ ìƒì„±/ì†Œë©¸ ê²°ì •)
+/// PlayerClientê°€ ê´€ë¦¬.
 /// </summary>
 public class ActorNetObserver : MonoBehaviour
 {
@@ -31,18 +31,18 @@ public class ActorNetObserver : MonoBehaviour
 
 
 	[Space(2)]
-	[Header("³×Æ®¿öÅ· - ¼ÒÀ¯ÀÚ")]
+	[Header("ë„¤íŠ¸ì›Œí‚¹ - ì†Œìœ ì")]
 	[SerializeField] private Vector3 lastPosition = Vector3.zero;
 	[SerializeField] private Quaternion lastRotation = Quaternion.identity;
-	[SerializeField] private byte transformFlags = 0; // 1: À§Ä¡, 2: È¸Àü, 4: µÑ Áß ÇÏ³ª¶óµµ ¹ß»ı
+	[SerializeField] private byte transformFlags = 0; // 1: ìœ„ì¹˜, 2: íšŒì „, 4: ë‘˜ ì¤‘ í•˜ë‚˜ë¼ë„ ë°œìƒ
 	public float lastSendTime = 0.0f;
 
 
 	[Space(2)]
-	[Header("³×Æ®¿öÅ· - ºñ¼ÒÀ¯ÀÚ")]
-	public Vector3 netPosition = Vector3.zero; // ¼­¹ö »ó¿¡¼­ Å¸ ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡ °ª
-	public Quaternion netRotation = Quaternion.identity; // ¼­¹ö »ó¿¡¼­ Å¸ ÇÃ·¹ÀÌ¾îÀÇ È¸Àü °ª
-	[SerializeField] private float netReceivedTime = 0.0f; // ¼­¹ö¿¡¼­ ¾÷µ¥ÀÌÆ®¹ŞÀº ½Ã°£ (·ÎÄÃ °è»ê)
+	[Header("ë„¤íŠ¸ì›Œí‚¹ - ë¹„ì†Œìœ ì")]
+	public Vector3 netPosition = Vector3.zero; // ì„œë²„ ìƒì—ì„œ íƒ€ í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ ê°’
+	public Quaternion netRotation = Quaternion.identity; // ì„œë²„ ìƒì—ì„œ íƒ€ í”Œë ˆì´ì–´ì˜ íšŒì „ ê°’
+	[SerializeField] private float netReceivedTime = 0.0f; // ì„œë²„ì—ì„œ ì—…ë°ì´íŠ¸ë°›ì€ ì‹œê°„ (ë¡œì»¬ ê³„ì‚°)
 
 
 	public void Initialize(Actor myActor, uint actorGuid, int ownerPlayerId, Vector3 netPos, Quaternion netRot)
@@ -55,7 +55,7 @@ public class ActorNetObserver : MonoBehaviour
 		netPosition = actor.transform.position;
 		netRotation = actor.transform.rotation;
 
-		Debug.Log("ActorNetObserver [" + actorGuid + "] ÃÊ±âÈ­ ¿Ï·á!");
+		Debug.Log("ActorNetObserver [" + actorGuid + "] ì´ˆê¸°í™” ì™„ë£Œ!");
 
 		name = "[Ob]" + actor.name;
 	}
@@ -71,7 +71,7 @@ public class ActorNetObserver : MonoBehaviour
 		transformFlags = 0b0000;
 
 
-		// º»ÀÎÀÇ °ÍÀÌ ¾Æ´Ñ °æ¿ì
+		// ë³¸ì¸ì˜ ê²ƒì´ ì•„ë‹Œ ê²½ìš°
 		if (!bIsMine)
 		{
 			_CheckPositionFlag(lastPosition, netPosition);
@@ -97,13 +97,13 @@ public class ActorNetObserver : MonoBehaviour
 		if (lastSendTime + actor.sendSerializeDelay > Time.time) return;
 		lastSendTime = Time.time + actor.sendSerializeDelay;
 
-		// ³» °ÍÀÎ °æ¿ì
+		// ë‚´ ê²ƒì¸ ê²½ìš°
 		_CheckPositionFlag(actor.transform.position, lastPosition);
 		_CheckRotationFlag(actor.transform.rotation, lastRotation);
 
 		serializer.Initialize();
 
-		// µÑ Áß ÇÏ³ªÀÇ º¯È­¶óµµ ÀÖ¾ú´Ù¸é Á÷·ÄÈ­ÇØ¼­ Àü¼Û
+		// ë‘˜ ì¤‘ í•˜ë‚˜ì˜ ë³€í™”ë¼ë„ ìˆì—ˆë‹¤ë©´ ì§ë ¬í™”í•´ì„œ ì „ì†¡
 		if ((transformFlags & 0b0100) != 0)
 		{
 			serializer.Push(actorGuid);
@@ -131,7 +131,7 @@ public class ActorNetObserver : MonoBehaviour
 	}
 
 
-	[MethodImpl(MethodImplOptions.AggressiveInlining)] // C++ÀÇ inline Å°¿öµå¿Í À¯»ç
+	[MethodImpl(MethodImplOptions.AggressiveInlining)] // C++ì˜ inline í‚¤ì›Œë“œì™€ ìœ ì‚¬
 	private void _CheckPositionFlag(Vector3 source, Vector3 newPos)
 	{
 		if (!NearlyEqual(source, newPos))
@@ -141,7 +141,7 @@ public class ActorNetObserver : MonoBehaviour
 	}
 
 
-	[MethodImpl(MethodImplOptions.AggressiveInlining)] // C++ÀÇ inline Å°¿öµå¿Í À¯»ç
+	[MethodImpl(MethodImplOptions.AggressiveInlining)] // C++ì˜ inline í‚¤ì›Œë“œì™€ ìœ ì‚¬
 	private void _CheckRotationFlag(Quaternion source, Quaternion newRot)
 	{
 		if (source != newRot)
@@ -173,6 +173,7 @@ public class ActorNetObserver : MonoBehaviour
 	{
 		FLGameplayHelper.actorDictionary.Remove(actorGuid);
 		PlayerClient.actorObservers.Remove(actorGuid);
-		Debug.Log("ActorNetObserver [" + actorGuid + "] Á¦°ÅµÊ!");
+		Debug.Log("ActorNetObserver [" + actorGuid + "] ì œê±°ë¨!");
+  		if (actor != null) Destroy(actor);
 	}
 }
